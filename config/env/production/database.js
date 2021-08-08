@@ -5,7 +5,7 @@ module.exports = ({ env }) => {
 
   return {
     defaultConnection: "default",
-    connection: {
+    connections: {
       default: {
         connector: "bookshelf",
         settings: {
