@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "products",
   "info": {
-    "name": "product"
+    "name": "product",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -13,7 +14,8 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
     },
     "description": {
       "type": "text",
@@ -44,6 +46,10 @@
     "categories": {
       "via": "products",
       "collection": "category"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
     }
   }
 }

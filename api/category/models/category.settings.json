@@ -16,8 +16,8 @@
       "required": true
     },
     "products": {
-      "collection": "product",
       "via": "categories",
+      "collection": "product",
       "dominant": true
     }
   }
