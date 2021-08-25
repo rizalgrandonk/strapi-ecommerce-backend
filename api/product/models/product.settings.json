@@ -34,7 +34,7 @@
       "default": false
     },
     "image": {
-      "model": "file",
+      "collection": "file",
       "via": "related",
       "allowedTypes": [
         "images"
@@ -50,6 +50,21 @@
     "slug": {
       "type": "uid",
       "targetField": "name"
+    },
+    "banner_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "sizeOptions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product-size.size"
     }
   }
 }

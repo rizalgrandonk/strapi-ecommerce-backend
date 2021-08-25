@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "name": "order",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "orderedProducts": {
+      "type": "component",
+      "repeatable": true,
+      "component": "product-size.ordered-products"
+    },
+    "customer": {
+      "type": "component",
+      "repeatable": false,
+      "component": "product-size.customer"
+    },
+    "payment_type": {
+      "type": "string"
+    },
+    "shipping_price": {
+      "type": "decimal"
+    },
+    "total_amount": {
+      "type": "decimal"
+    },
+    "payment_code": {
+      "type": "string"
+    },
+    "transaction_status": {
+      "type": "string"
+    },
+    "order_id": {
+      "type": "string"
+    },
+    "transaction_id": {
+      "type": "string"
+    }
+  }
+}

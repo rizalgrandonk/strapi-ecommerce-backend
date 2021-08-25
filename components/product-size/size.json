@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_product_size_sizes",
+  "info": {
+    "name": "SizeList",
+    "icon": "arrows-alt-h",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "size": {
+      "type": "enumeration",
+      "enum": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ]
+    }
+  }
+}

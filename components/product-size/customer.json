@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_product_size_customers",
+  "info": {
+    "name": "customer",
+    "icon": "child"
+  },
+  "options": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "address": {
+      "type": "text"
+    }
+  }
+}
