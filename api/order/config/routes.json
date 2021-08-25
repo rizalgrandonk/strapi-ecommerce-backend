@@ -41,6 +41,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/orders/notification",
+      "handler": "order.notification",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/orders/count",
       "handler": "order.count",

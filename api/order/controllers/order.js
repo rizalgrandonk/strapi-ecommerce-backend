@@ -38,10 +38,62 @@ const getOngkir = async (city, key) => {
 };
 
 function getRandomInt() {
-  return Math.floor(Math.random() * (100000 - 1000) + 1000);
+  return Math.floor(Math.random() * (1000000 - 1000) + 1000);
 }
 
 module.exports = {
+  async notification(ctx) {
+    let apiClient = new midtransClient.Snap({
+      isProduction: false,
+      serverKey: strapi.config.get("payment.serverKey"),
+      clientKey: strapi.config.get("payment.clientKey"),
+    });
+
+    const updateTransaction = async (order_id, status) => {
+      const order = await strapi.services.order.findOne({ order_id });
+      const updatedOrder = await strapi.services.order.update(
+        { order_id },
+        { ...order, transaction_status: status }
+      );
+
+      return updatedOrder;
+    };
+
+    const handleResponse = async ({
+      order_id,
+      transaction_status,
+      fraud_status,
+    }) => {
+      if (transaction_status == "capture") {
+        if (fraud_status == "challenge") {
+          const updatedOrder = await updateTransaction(order_id, "challenge");
+          return updatedOrder;
+        } else if (fraud_status == "accept") {
+          const updatedOrder = await updateTransaction(order_id, "success");
+          return updatedOrder;
+        }
+      } else if (transaction_status == "settlement") {
+        const updatedOrder = await updateTransaction(order_id, "success");
+        return updatedOrder;
+      }
+      const updatedOrder = await updateTransaction(
+        order_id,
+        transaction_status
+      );
+      return updatedOrder;
+    };
+
+    try {
+      const statusResponse = await apiClient.transaction.notification(
+        ctx.request.body
+      );
+      const order = await handleResponse(statusResponse);
+      return sanitizeEntity(order, { model: strapi.models.order });
+    } catch (error) {
+      ctx.throw(400, "City ID Required", error);
+    }
+  },
+
   async token(ctx) {
     const { products, customer } = ctx.request.body;
     const productList = await strapi.services.product.find();
