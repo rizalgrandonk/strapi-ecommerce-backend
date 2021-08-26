@@ -90,7 +90,7 @@ module.exports = {
       const order = await handleResponse(statusResponse);
       return sanitizeEntity(order, { model: strapi.models.order });
     } catch (error) {
-      ctx.throw(400, "City ID Required", error);
+      ctx.throw(500, "Something Wrong", error);
     }
   },
 
@@ -203,6 +203,11 @@ module.exports = {
     const { order_id } = ctx.params;
 
     const entity = await strapi.services.order.findOne({ order_id });
+
+    if (!entity) {
+      ctx.throw(404, "Order not found", { message: "Order not found" });
+    }
+
     return sanitizeEntity(entity, { model: strapi.models.order });
   },
 };
