@@ -57,7 +57,7 @@
       }
     },
     {
-      "method": "GET",
+      "method": "POST",
       "path": "/orders/:order_id",
       "handler": "order.findOne",
       "config": {

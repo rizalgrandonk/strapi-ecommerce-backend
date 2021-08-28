@@ -201,8 +201,15 @@ module.exports = {
 
   async findOne(ctx) {
     const { order_id } = ctx.params;
+    const { email } = ctx.request.body;
 
     const entity = await strapi.services.order.findOne({ order_id });
+
+    if (entity.customer.email != email) {
+      ctx.throw(403, "The order not belong to the email", {
+        message: "The order not belong to the email",
+      });
+    }
 
     if (!entity) {
       ctx.throw(404, "Order not found", { message: "Order not found" });
